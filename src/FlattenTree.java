@@ -1,17 +1,26 @@
 class FlattenTree {
-    public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, null, null);
+    public void flatten(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        root.left = null;
+
+        if (left != null) {
+            root.right = left;
+            while (left.right != null) {
+                left = left.right;
+            }
+            left.right = right;
+        }
     }
 
-    private boolean isValidBST(TreeNode root, Integer min, Integer max) {
-        if(root == null) {
-            return true;
-        }
-        if((max != null && root.val >= max) || (min != null && root.val <= min)) {
-            return false;
-        }
-        return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
-    }
 }
 
 
