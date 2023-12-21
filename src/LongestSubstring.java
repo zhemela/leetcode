@@ -17,7 +17,6 @@ public class LongestSubstring {
                 f++;
             }
         }
-        System.out.println(set);
 
         return length;
     }
